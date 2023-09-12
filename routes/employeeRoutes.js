@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/list", (req, res) => {
+router.get("/", (req, res) => {
   //  res.send("Hello World!");
   // res.status(5000).send("Error 5000");
   res.json({
@@ -15,9 +15,12 @@ router.get("/list", (req, res) => {
   });
 });
 
-router.get("/show", (req, res) => {
+router.get("/:id", (req, res) => {
   //  res.send("Hello World!");
   // res.status(5000).send("Error 5000");
+  const id = req.params.id;
+  console.log(id);
+
   res.json({
     first_name: "Juan",
     last_name: "Dela Cruz",
@@ -26,6 +29,18 @@ router.get("/show", (req, res) => {
     gender: "Male",
     request_date: new Date(),
   });
+});
+
+router.post("/", (req, res) => {
+  res.json({ message: "post request successfull" });
+});
+
+router.patch("/", (req, res) => {
+  res.json({ message: "patch request successfull" });
+});
+
+router.delete("/", (req, res) => {
+  res.json({ message: "delete request successfull" });
 });
 
 export default router;
