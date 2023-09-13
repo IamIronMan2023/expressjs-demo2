@@ -35,11 +35,11 @@ router.post("/", (req, res) => {
   res.json({ message: "post request successfull" });
 });
 
-router.patch("/", (req, res) => {
+router.patch("/:id", (req, res) => {
   res.json({ message: "patch request successfull" });
 });
 
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
   res.json({ message: "delete request successfull" });
 });
 
