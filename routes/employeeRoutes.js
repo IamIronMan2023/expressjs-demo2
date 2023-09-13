@@ -1,32 +1,13 @@
 import express from "express";
-import Employee from "../models/Employee.js";
+import {
+  getAllEmployees,
+  getEmployee,
+} from "../controllers/employeeController.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const employees = await Employee.find({});
-    res.json(employees);
-  } catch (error) {
-    throw error;
-  }
-});
-
-router.get("/:id", (req, res) => {
-  //  res.send("Hello World!");
-  // res.status(5000).send("Error 5000");
-  const id = req.params.id;
-  console.log(id);
-
-  res.json({
-    first_name: "Juan",
-    last_name: "Dela Cruz",
-    age: 20,
-    email: "jdelacruz@email.com",
-    gender: "Male",
-    request_date: new Date(),
-  });
-});
+router.get("/", getAllEmployees);
+router.get("/:id", getEmployee);
 
 router.post("/", (req, res) => {
   res.json({ message: "post request successfull" });
