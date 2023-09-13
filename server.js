@@ -4,11 +4,25 @@ import employeeRoutes from "./routes/employeeRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import logger from "./middlewares/logger.js";
 import auth from "./middlewares/auth.js";
+import cors from "cors";
+import mongoose from "mongoose";
 
+//Express setup
 const app = express();
 
-app.use(logger);
-app.use(auth);
+//Connect to MongoDB
+mongoose.connect(process.env.HOST + process.env.DB, { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on("error", (error) => console.log(error));
+db.on("open", () => console.log("Connected to database..."));
+
+//Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+
+// app.use(logger);
+// app.use(auth);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/users", userRoutes);
 
