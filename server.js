@@ -12,22 +12,12 @@ const app = express();
 
 //Connect to MongoDB
 
-// mongoose.connect(process.env.HOST + process.env.DB, {
-//   useNewUrlParser: true,
-// });
-// const db = mongoose.connection;
-// db.on("error", (error) => console.log(error));
-// db.on("open", () => console.log("Connected to database..."));
-
-//recommended because it waits for database to connect
-try {
-  await mongoose.connect(process.env.HOST + process.env.DB, {
-    useNewUrlParser: true,
-  });
-  console.log("Connected to database...");
-} catch (error) {
-  console.log(error);
-}
+mongoose.connect(process.env.HOST + process.env.DB, {
+  useNewUrlParser: true,
+});
+const db = mongoose.connection;
+db.on("error", (error) => console.log(error));
+db.on("open", () => console.log("Connected to database..."));
 
 //Middlewares
 app.use(express.json());
