@@ -19,7 +19,7 @@ const getAllEmployees = async (req, res) => {
     const employees = await Employee.find({});
     res.json(employees);
   } catch (error) {
-    throw error;
+    res.status(400).json(handleError(err));
   }
 };
 
@@ -40,7 +40,7 @@ const getEmployee = async (req, res) => {
       res.status(404).json({ message: "Record not found." });
     }
   } catch (error) {
-    throw error;
+    res.status(400).json(handleError(err));
   }
 };
 
@@ -91,7 +91,7 @@ const updateEmployee = async (req, res) => {
       res.status(204).json({ message: "Failed to update Employee record." });
     }
   } catch (err) {
-    throw err;
+    res.status(400).json(handleError(err));
   }
 };
 
