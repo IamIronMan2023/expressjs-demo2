@@ -1,6 +1,19 @@
 import mongoose from "mongoose";
 import Employee from "../models/Employee.js";
 
+const handleError = (err) => {
+  let errors = [];
+  // errors.push(err.message);
+
+  if (err.message.includes("Employee validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors.push({ message: properties.message });
+    });
+  }
+
+  return errors;
+};
+
 const getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.find({});
@@ -50,7 +63,7 @@ const createEmployee = async (req, res) => {
       res.status(204).json({ message: "Failed to create employee record." });
     }
   } catch (err) {
-    throw error;
+    res.status(400).json(handleError(err));
   }
 };
 
