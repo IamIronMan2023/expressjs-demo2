@@ -82,4 +82,26 @@ const updateEmployee = async (req, res) => {
   }
 };
 
-export { getAllEmployees, getEmployee, createEmployee, updateEmployee };
+const deleteEmployee = async (req, res) => {
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: "Invalid parameter" });
+    return;
+  }
+
+  try {
+    const employee = await Employee.findByIdAndDelete(id);
+    res.json({ message: "Employee successfully deleted." });
+  } catch (err) {
+    res.json({ message: "Failed to delete Employee record." });
+  }
+};
+
+export {
+  getAllEmployees,
+  getEmployee,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+};
