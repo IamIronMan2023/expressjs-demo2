@@ -31,4 +31,55 @@ const getEmployee = async (req, res) => {
   }
 };
 
-export { getAllEmployees, getEmployee };
+const createEmployee = async (req, res) => {
+  const { first_name, last_name, email, age } = req.body;
+
+  try {
+    const employee = await Employee.create({
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      age: age,
+    });
+
+    if (employee) {
+      res
+        .status(201)
+        .json({ message: "Employee successfully created", data: employee });
+    } else {
+      res.status(204).json({ message: "Failed to create employee record." });
+    }
+  } catch (err) {
+    throw error;
+  }
+};
+
+const updateEmployee = async (req, res) => {
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: "Invalid parameter" });
+    return;
+  }
+
+  try {
+    const { first_name, last_name, email, age } = req.body;
+
+    const employee = await Employee.findByIdAndUpdate(id, {
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      age: age,
+    });
+
+    if (employee) {
+      res.json({ message: "Employee updated successfully" });
+    } else {
+      res.status(204).json({ message: "Failed to update Employee record." });
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+export { getAllEmployees, getEmployee, createEmployee, updateEmployee };
