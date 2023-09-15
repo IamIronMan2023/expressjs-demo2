@@ -3,7 +3,6 @@ import "dotenv/config";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import logger from "./middlewares/logger.js";
-import auth from "./middlewares/auth.js";
 import cors from "cors";
 import mongoose from "mongoose";
 
@@ -35,7 +34,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // app.use(logger);
-// app.use(auth);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/users", userRoutes);
 

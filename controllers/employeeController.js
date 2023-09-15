@@ -18,7 +18,7 @@ const getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.find({});
     res.json(employees);
-  } catch (error) {
+  } catch (err) {
     res.status(400).json(handleError(err));
   }
 };
@@ -39,7 +39,7 @@ const getEmployee = async (req, res) => {
     } else {
       res.status(404).json({ message: "Record not found." });
     }
-  } catch (error) {
+  } catch (err) {
     res.status(400).json(handleError(err));
   }
 };
