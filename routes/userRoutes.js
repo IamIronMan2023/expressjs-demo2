@@ -1,15 +1,8 @@
 import express from "express";
+import { createUser } from "../controllers/userController.js";
 
 const router = express.Router();
 
-router.get("/list", (req, res) => {
-  //  res.send("Hello World!");
-  // res.status(5000).send("Error 5000");
-  res.json({
-    login_name: "jdoe",
-    email: "jdoe@email.com",
-    request_date: new Date(),
-  });
-});
+router.post("/", createUser);
 
 export default router;

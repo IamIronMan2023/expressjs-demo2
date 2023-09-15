@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-userTokenSchema = new mongoose.Schema({
+const userTokenSchema = new mongoose.Schema({
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -12,4 +12,4 @@ userTokenSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("UserToken", userSchema);
+export default mongoose.model("UserToken", userTokenSchema);
