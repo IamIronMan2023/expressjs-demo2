@@ -58,4 +58,20 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { createUser, loginUser };
+const logoutUser = async (req, res) => {
+  const { access_token } = req.body;
+
+  try {
+    const userToken = await UserToken.findOneAndDelete({ token: access_token });
+
+    if (userToken) {
+      res.json({ message: "Log Out successfuly" });
+    } else {
+      res.status(400).json({ message: "Log out failed" });
+    }
+  } catch (err) {
+    res.status(400).json({ message: "Invalid parameter" });
+  }
+};
+
+export { createUser, loginUser, logoutUser };
