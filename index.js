@@ -28,6 +28,10 @@ try {
   console.log(err);
 }
 
+app.get("/", (req, res) => {
+  res.send("Vercel successfully deployed");
+});
+
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
