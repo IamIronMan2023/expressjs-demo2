@@ -5,6 +5,8 @@ import userRoutes from "./routes/userRoutes.js";
 import logger from "./middlewares/logger.js";
 import cors from "cors";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
 
 //Express setup
 const app = express();
@@ -29,6 +31,10 @@ try {
 }
 
 //Middlewares
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
